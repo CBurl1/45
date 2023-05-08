@@ -1,5 +1,6 @@
-import './App.css';
 import React from "react";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Account from './Account.js';
 
 function App() {
   return (
@@ -9,15 +10,32 @@ function App() {
           Welcome to the ski pass recommender
         </p>
         <body>
-            <p> <button>View your account:</button> </p>
-            <p> <button>View your recommendation:</button> </p> 
-            <p> <button>View passes</button> </p>
-            <p><button>View resorts:</button> </p>
+          <p><Link to="/account">View your account:</Link></p>
+          <p><button>View your recommendation:</button></p> 
+          <p><button>View passes</button></p>
+          <p><button>View resorts:</button></p>
         </body>
       </header>
+      <Routes>
+        <Route path="/account" element={<Account />} />
+      </Routes>
     </div>
   );
 }
 
-export default App;
+export default function Router() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  )
+}
+
+
+
+
+
+
+
+
 
