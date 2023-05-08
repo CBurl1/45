@@ -1,6 +1,8 @@
 # Remote library imports
+from flask import Flask, request, make_response, session, abort, jsonify
 from flask_restful import Resource
-from flask import request, make_response, session, abort, response
+from werkzeug.exceptions import NotFound, Unauthorized
+from flask_bcrypt import Bcrypt
 
 # Local imports
 from config import app, api, db
