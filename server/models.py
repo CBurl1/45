@@ -13,7 +13,7 @@ class User(db.Model):
     name = db.Column(db.String)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
-    admin = db.Column(db.String, default = False)
+    admin = db.Column(db.Boolean, default = False)
 
     # budget = db.Column(db.Float, nullable=False)
     # location_region = db.Column(db.String, nullable=False)
