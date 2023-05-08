@@ -1,4 +1,5 @@
 import './App.css';
+import Authentication from './Authentication.js';
 import Account from './Account.js';
 import Resorts from './Resorts.js';
 import Passes from './Passes.js';
@@ -14,6 +15,7 @@ function Home() {
           Welcome to the ski pass recommender
         </p>
         <body>
+          <p> <Link to="/authentication">Authentication:</Link> </p>
           <p> <Link to="/account">View your account:</Link> </p>
           <p> <Link to="/your-recommendation">View your recommendation:</Link> </p>
           <p> <Link to="/passes">View passes:</Link> </p>
@@ -29,6 +31,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/authentication" element={<Authentication />} />
         <Route path="/account" element={<Account />} />
         <Route path="/resorts" element={<Resorts />} />
         <Route path="/passes" element={<Passes />} />

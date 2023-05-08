@@ -1,8 +1,9 @@
 # Remote library imports
 from flask_restful import Resource
+from flask import request, make_response, session, abort, response
 
 # Local imports
-from config import app, api
+from config import app, api, db
 from models import Pass, Resort, User, Recommendation
 
 class Home(Resource):
@@ -34,6 +35,56 @@ class PassRec(Resource):
         return "View your recommendation here"
 
 api.add_resource(PassRec, '/passrec')
+
+class Users(Resource):
+    def post(self):
+        form_json = request.get_json()
+        new_user = User(
+            name = form_json['name'],
+            email = form_json['email']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        session['user.id'] = new_user.id
+        import ipdb; ipdb.set_trace()
+        response = make_response(
+            new_user.to_dict(),
+            201
+        )
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        response = make_response('',204)
+        return response
+api.add_resource(Logout, '/logout')
+
+
+class AuthorizedSession(Resource):
+    def get(self):
+        user = User.query.filter_by(id=session.get('user_id')).first()
+        if user:
+            response = make_response(
+                user.to_dict(),
+                200
+            )
+            return response
+        else:
+            abort(401, "Unauthorized")
+api.add_resource(AuthorizedSession, '/authorized')
+
+class Login(Resource):
+    def post(self):
+        user = User.query.filter_by(name=request.get_json()['name']).first()
+        session['user_id'] = user.id
+        response = make_response(
+            user.to_dict(),
+            200
+        )
+        return response
+
+api.add_resource(Login, '/login')
+
 
 if __name__ == '__main__':
     app.run(port=5555)

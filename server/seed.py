@@ -17,6 +17,7 @@ snowshoe = Resort(name='Snowshoe', location_region="USA East", location_state="W
 ikon = Pass(name='Ikon Pass', price=1259.00)
 
 # add the resorts to the ski pass
+
 ikon.resort_id.append(sundayRiver)
 ikon.resort_id.append(sugarloaf)
 ikon.resort_id.append(sugarbush)
