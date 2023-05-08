@@ -4,9 +4,12 @@ from flask_restful import Resource
 from werkzeug.exceptions import NotFound, Unauthorized
 from flask_bcrypt import Bcrypt
 
+
 # Local imports
 from config import app, api, db
 from models import Pass, Resort, User, Recommendation
+
+bcrypt = Bcrypt(app)
 
 class Home(Resource):
     def get(self):
