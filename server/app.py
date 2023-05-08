@@ -2,14 +2,13 @@
 from flask import Flask, request, make_response, session, abort, jsonify
 from flask_restful import Resource
 from werkzeug.exceptions import NotFound, Unauthorized
-from flask_bcrypt import Bcrypt
+import ipdb
 
 
 # Local imports
 from config import app, api, db
-from models import Pass, Resort, User, Recommendation
+from models import User
 
-bcrypt = Bcrypt(app)
 
 class Home(Resource):
     def get(self):
@@ -51,7 +50,7 @@ class Users(Resource):
         db.session.add(new_user)
         db.session.commit()
         session['user.id'] = new_user.id
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         response = make_response(
             new_user.to_dict(),
             201
