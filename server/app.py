@@ -66,15 +66,15 @@ api.add_resource(Logout, '/logout')
 
 class AuthorizedSession(Resource):
     def get(self):
-        user = User.query.filter_by(id=session.get('user_id')).first()
-        if user:
+        try:
+            user = User.query.filter_by(id=session.get('user_id')).first()
             response = make_response(
                 user.to_dict(),
                 200
             )
-            return response
-        else:
+        except:
             abort(401, "Unauthorized")
+            
 api.add_resource(AuthorizedSession, '/authorized')
 
 class Login(Resource):
