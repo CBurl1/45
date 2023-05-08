@@ -8,22 +8,11 @@ function App() {
         <p>
           Welcome to the ski pass recommender
         </p>
-        <p>
-          View your recommendation:
-        </p>
-        <p>
-          View passes:
-        </p>
-        <p>
-          View resorts:
-        </p>
-        <p>
-          View your account:
-        </p>
         <body>
-          <button>Log In</button>
-          <button>Sign Up</button>
-          <button>Log Out</button>
+            <p> <button>View your account:</button> </p>
+            <p> <button>View your recommendation:</button> </p> 
+            <p> <button>View passes</button> </p>
+            <p><button>View resorts:</button> </p>
         </body>
       </header>
     </div>
