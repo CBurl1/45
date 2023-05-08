@@ -19,6 +19,12 @@ class User(db.Model):
     # location_region = db.Column(db.String, nullable=False)
     # location_state = db.Column(db.String, nullable=False)
     # recommendations = db.relationship('Recommendation', backref='user')
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email
+        }
 
     @hybrid_property
     def password_hash(self):
