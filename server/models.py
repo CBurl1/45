@@ -34,7 +34,7 @@ class User(db.Model):
 
 class Resort(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable = False)
+    name = db.Column(db.String, nullable=False)
     location_region = db.Column(db.String, nullable=False)
     location_state = db.Column(db.String, nullable=False)
     passes = db.relationship('Pass', backref='resort')
@@ -47,5 +47,6 @@ class Recommendation(db.Model):
 class Pass(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    price = db.Column(db.Float, nullable = False)
+    price = db.Column(db.Float, nullable=False)
+    resort_association = db.relationship('Resort', backref='passes')
     resort_id = db.Column(db.Integer, db.ForeignKey('resort.id'))
