@@ -74,13 +74,14 @@ class AuthorizedSession(Resource):
             )
         except:
             abort(401, "Unauthorized")
-            
+
 api.add_resource(AuthorizedSession, '/authorized')
 
 class Login(Resource):
     def post(self):
-        try:
             user = User.query.filter_by(name= request.get_json()['name']).first()
+            if not user:
+                abort (401, "Incorrect Username or Password")
             if user.authenticate(request.get_json() ['password']):
                 session['user_id'] = user.id
                 response = make_response(
@@ -88,8 +89,7 @@ class Login(Resource):
                     200
                 )
                 return response
-        except:
-            abort (401, "Incorrect Username or Password")
+
 
 api.add_resource(Login, '/login')
 
@@ -100,7 +100,6 @@ class Signup (Resource):
         new_user.password_hash = form_json ['password']
         db.session.add(new_user)
         db.session.commit()
-
         response = make_response(
             new_user.to_dict(),
             201
