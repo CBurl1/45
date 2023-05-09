@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
-function Signup() {
+function Signup({ user, setUser }) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -8,14 +9,20 @@ function Signup() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch('http://localhost:5555/signup', {
+    fetch('/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, name, password })
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        setUser(data);
+      })
       .catch(error => console.error(error));
+  }
+
+  if (user) {
+    return <Navigate replace to="/" />;
   }
 
   return (

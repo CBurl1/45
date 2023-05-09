@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-function Login() {
+function Login({ user, setUser }) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,12 +13,14 @@ function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password })
     })
-      .then((r) => {
-        if (r.ok) {
-          r.json().then((user) => setUser(user));
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((data) => {
+            const { id, name, email } = data;
+            setUser({ id, name, email });
+          });
         } else {
-          r.json().then((err) => console.log(err));
-          window.alert("Invalid Username or Password - Please Try Again");
+          console.log('Invalid Username or Password - Please Try Again');
         }
       });
   }
@@ -46,3 +47,5 @@ function Login() {
 }
 
 export default Login;
+
+
