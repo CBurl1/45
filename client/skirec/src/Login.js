@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-function Login(props) {
+function Login() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,34 +14,35 @@ function Login(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password })
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.success) {
-          // Set the username state in the App component
-          props.setUsername(name);
-
-          // Navigate to the home page
-          navigate('/');
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => setUser(user));
+        } else {
+          r.json().then((err) => console.log(err));
+          window.alert("Invalid Username or Password - Please Try Again");
         }
-      })
-      .catch(error => console.error(error));
+      });
+  }
+
+  if (user) {
+    return <Navigate replace to="/" />;
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Username:
-        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </label>
       <br />
       <label>
         Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       <br />
       <button type="submit">Log in</button>
     </form>
   );
 }
+
 export default Login;

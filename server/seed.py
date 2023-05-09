@@ -18,15 +18,6 @@ ikon = Pass(name='Ikon Pass', price=1259.00)
 
 # add the resorts to the ski pass
 
-ikon.resort_id.append(sundayRiver)
-ikon.resort_id.append(sugarloaf)
-ikon.resort_id.append(sugarbush)
-ikon.resort_id.append(killington)
-ikon.resort_id.append(stratton)
-ikon.resort_id.append(loon)
-ikon.resort_id.append(windham)
-ikon.resort_id.append(snowshoe)
-
 
 # add all the objects to the database session
 db.session.add(ikon)
