@@ -15,24 +15,28 @@ function Home({ username }) {
         <h1>Welcome, {username}!</h1>
         <p>The ski pass recommender</p>
         <body>
-          <p>
+          <button>
             <Link to="/signup">Signup:</Link>{' '}
-          </p>
-          <p>
+          </button>
+          <button>
             <Link to="/login">Login:</Link>{' '}
-          </p>
-          <p>
+          </button>
+          <br></br>
+          <button>
             <Link to="/account">View your account:</Link>{' '}
-          </p>
-          <p>
+          </button>
+          <br></br>
+          <button>
             <Link to="/your-recommendation">View your recommendation:</Link>{' '}
-          </p>
-          <p>
+          </button>
+          <br></br>
+          <button>
             <Link to="/passes">View passes:</Link>{' '}
-          </p>
-          <p>
+          </button>
+          <br></br>
+          <button>
             <Link to="/resorts">View resorts:</Link>{' '}
-          </p>
+          </button>
         </body>
       </header>
     </div>
