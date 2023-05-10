@@ -2,8 +2,8 @@ import './App.css';
 import Signup from './Signup.js';
 import Login from './Login.js';
 import Resorts from './Resorts.js';
-import Passes from './Passes.js';
-import Recommendation from './Recommendation.js';
+import Yourcomments from './Yourcomments.js';
+import CommentCreator from './Commentcreator.js';
 import Home from './Home.js'
 import React, { useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -19,8 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/recommendation" element={<Recommendation />} />
-          <Route path="/passes" element={<Passes />} />
+          <Route path="/comment-creator" element={<CommentCreator />} />
+          <Route path="/your-comments" element={<Yourcomments />} />
           <Route path="/resorts" element={<Resorts />} />
         </Routes>
       </BrowserRouter>

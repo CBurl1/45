@@ -45,15 +45,15 @@ function Home() {
       <div className="App">
         <header className="App-header">
           <h1>Welcome, {user.name} !</h1>
-          <strong>The terrain park reviewer</strong>
+          <strong>Comment on the state of terrain parks and let other users know about changes that the park crew has made</strong>
           <body>
             <br></br>
             <button>
-              <Link to="/recommendation">Make a recommendation:</Link>{' '}
+              <Link to="/comment-creator">Make a Comment:</Link>{' '}
             </button>
             <br></br>
             <button>
-              <Link to="/passes">View passes:</Link>{' '}
+              <Link to="/your-comments">View Your Comments:</Link>{' '}
             </button>
             <br></br>
             <button>
