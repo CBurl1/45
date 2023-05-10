@@ -7,12 +7,13 @@ from sqlalchemy.ext.hybrid import hybrid_property
 # from werkzeug.security import generate_password_hash, check_password_hash
 from config import db, bcrypt
 
-class User(db.Model):    
+class User(db.Model, SerializerMixin):    
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
-    comments = db.relationship('Comment', back_populates='user')
+    comments = db.relationship('Comment', backref='user')
+    serialize_rules = ('-comments.user', '-password')
 
     # budget = db.Column(db.Float, nullable=False)
     # location_region = db.Column(db.String, nullable=False)
@@ -45,13 +46,14 @@ class User(db.Model):
 
 
 
-class Resort(db.Model):
+class Resort(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     location_region = db.Column(db.String, nullable=False)
     location_state = db.Column(db.String, nullable=False)
-    comments = db.relationship('Comment', back_populates='resort')
+    comments = db.relationship('Comment', backref='resort')
+    serialize_rules = ('-comment.resort',)
 
 
     @validates('name')
@@ -63,13 +65,13 @@ class Resort(db.Model):
             raise ValueError('Resort with same name already exists')
         return value
 
-class Comment(db.Model):
+class Comment(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     resort_id = db.Column(db.Integer, db.ForeignKey('resort.id'))
-    user = db.relationship('User', back_populates='comments')
-    resort = db.relationship('Resort', back_populates='comments')
+    serialize_rules = ('-user.comments', '-resort.comments')
+
 
 
 
