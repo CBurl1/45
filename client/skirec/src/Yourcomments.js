@@ -54,6 +54,17 @@ function UserComments() {
     setEditedCommentText('');
   };
 
+  const handleDeleteComment = async (commentId) => {
+    const response = await fetch(`/deletecomment/${commentId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // Remove the deleted comment from the local state
+      setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
+    }
+  };
+
   return (
     <div>
       <h2>{user.name}'s Comments</h2>
@@ -73,6 +84,7 @@ function UserComments() {
               <p>Resort: {comment.resort.name}</p>
               <p>Comment: {comment.comment}</p>
               <button onClick={() => handleEditComment(comment)}>Edit</button>
+              <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
             </div>
           )}
         </div>
@@ -82,4 +94,5 @@ function UserComments() {
 }
 
 export default UserComments;
+
 

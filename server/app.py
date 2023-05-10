@@ -144,6 +144,21 @@ class ModifyComment(Resource):
             return make_response({'error': str(e)}, 500)
 api.add_resource(ModifyComment, '/changecomment/<int:comment_id>')
 
+class DeleteComment(Resource):
+    def delete(self, comment_id):
+        try:
+            comment = Comment.query.filter_by(id=comment_id).first()
+            if comment:
+                db.session.delete(comment)
+                db.session.commit()
+                return make_response({'message': 'Comment deleted successfully'}, 200)
+            else:
+                return make_response({'error': 'Comment not found'}, 404)
+        except Exception as e:
+            return make_response({'error': str(e)}, 500)
+        
+api.add_resource(DeleteComment, '/deletecomment/<int:comment_id>')
+
 if __name__ == '__main__':
     app.run(port=5555)
 
