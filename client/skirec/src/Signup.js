@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-function Signup({ user, setUser }) {
+function Signup() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,14 +15,17 @@ function Signup({ user, setUser }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, name, password })
     })
-      .then(response => response.json())
-      .then(data => {
-        setUser(data);
+      .then(response => {
+        if (response.ok) {
+          setRedirect(true);
+        } else {
+          window.alert('Sign up failed');
+        }
       })
       .catch(error => console.error(error));
   }
 
-  if (user) {
+  if (redirect) {
     return <Navigate replace to="/" />;
   }
 
@@ -48,3 +52,4 @@ function Signup({ user, setUser }) {
 }
 
 export default Signup;
+

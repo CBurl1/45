@@ -1,50 +1,66 @@
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import React from 'react';
 
-function Home({ user }) {
-    if (user){
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome, {user.name} !</h1>
-        <p>The ski pass recommender</p>
-        <body>
-          <br></br>
-          <button>
-            <Link to="/account">View your account:</Link>{' '}
-          </button>
-          <br></br>
-          <button>
-            <Link to="/your-recommendation">View your recommendation:</Link>{' '}
-          </button>
-          <br></br>
-          <button>
-            <Link to="/passes">View passes:</Link>{' '}
-          </button>
-          <br></br>
-          <button>
-            <Link to="/resorts">View resorts:</Link>{' '}
-          </button>
-        </body>
-      </header>
-    </div>
-  );
-}
-    else {
-        return (
+function Home({ user, setUser }) {
+
+  useEffect(() => {
+    fetch('/authorized')
+      .then(response => response.json())
+      .then(data => setUser(data))
+      .catch(error => console.error(error));
+  }, [user]);
+
+  
+  function handleLogout() {
+    fetch('/logout', { method: 'DELETE' })
+      .then(() => {
+        setUser(null);
+      })
+      .catch(error => console.error(error));
+  }
+  
+
+  if (!user) {
+      return (
         <div>
+          <header className="App-header">
+            <h1>Welcome to the Ski Pass Recommender !</h1>
+            <button>
+              <Link to="/signup">Signup:</Link>{' '}
+            </button>
+            <button>
+              <Link to="/login">Login:</Link>{' '}
+            </button>
+          </header>
+          {user === null && <p>You have been logged out</p>}
+        </div>
+      );
+  } else {
+    return (
+    <div className="App">
         <header className="App-header">
-        <h1>Welcome to the Ski Pass Recommender !</h1>
-        <button>
-        <Link to="/signup">Signup:</Link>{' '}
-      </button>
-      <button>
-        <Link to="/login">Login:</Link>{' '}
-      </button>
-      </header>
+          <h1>Welcome, {user.name} !</h1>
+          <p>The ski pass recommender</p>
+          <body>
+            <br></br>
+            <button>
+              <Link to="/recommendation">Make a recommendation:</Link>{' '}
+            </button>
+            <br></br>
+            <button>
+              <Link to="/passes">View passes:</Link>{' '}
+            </button>
+            <br></br>
+            <button>
+              <Link to="/resorts">View resorts:</Link>{' '}
+            </button>
+            <br></br>
+            <button onClick={handleLogout}>Logout</button>
+          </body>
+        </header>
       </div>
-  );
-
-    }
+      );
+  }
 }
+
 export default Home;

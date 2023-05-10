@@ -1,12 +1,10 @@
 import React from 'react';
 
-function Recommendation(props) {
-  const { recommendation } = props;
+function Recommendation() {
 
   return (
     <div>
-      <h2>Your Recommendation</h2>
-      <p>{recommendation}</p>
+      <h2>Make a Recommendation</h2>
     </div>
   );
 }

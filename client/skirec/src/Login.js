@@ -1,32 +1,30 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-function Login({ user, setUser }) {
+function Login() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch('http://localhost:5555/login', {
+    fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password })
     })
       .then((response) => {
         if (response.ok) {
-          response.json().then((data) => {
-            const { id, name, email } = data;
-            setUser({ id, name, email });
-          });
+          setRedirectToHome(true);
         } else {
           console.log('Invalid Username or Password - Please Try Again');
         }
       });
   }
 
-  if (user) {
-    return <Navigate replace to="/" />;
+  if (redirectToHome) {
+    return <Navigate to="/" />;
   }
 
   return (
@@ -47,5 +45,6 @@ function Login({ user, setUser }) {
 }
 
 export default Login;
+
 
 
