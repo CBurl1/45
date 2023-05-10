@@ -12,7 +12,7 @@ class User(db.Model):
     name = db.Column(db.String)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
-    admin = db.Column(db.Boolean, default = False)
+    comments = db.relationship('Comment', back_populates='user')
 
     # budget = db.Column(db.Float, nullable=False)
     # location_region = db.Column(db.String, nullable=False)
@@ -51,6 +51,8 @@ class Resort(db.Model):
     name = db.Column(db.String)
     location_region = db.Column(db.String, nullable=False)
     location_state = db.Column(db.String, nullable=False)
+    comments = db.relationship('Comment', back_populates='resort')
+
 
     @validates('name')
     def validate_name(self, key, value):
@@ -60,6 +62,17 @@ class Resort(db.Model):
         if existing_resort and existing_resort.id != self.id:
             raise ValueError('Resort with same name already exists')
         return value
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    resort_id = db.Column(db.Integer, db.ForeignKey('resort.id'))
+    user = db.relationship('User', back_populates='comments')
+    resort = db.relationship('Resort', back_populates='comments')
+
+
+
 
 
 # class Recommendation(db.Model):
