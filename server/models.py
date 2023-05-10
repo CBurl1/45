@@ -46,12 +46,20 @@ class User(db.Model):
 
 
 class Resort(db.Model):
-    __tablename__ = 'resorts'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    location_region = db.Column(db.String(100), nullable=False)
-    location_state = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String)
+    location_region = db.Column(db.String, nullable=False)
+    location_state = db.Column(db.String, nullable=False)
+
+    @validates('name')
+    def validate_name(self, key, value):
+        if not value:
+            raise ValueError('Name cannot be empty')
+        existing_resort = Resort.query.filter_by(name=value).first()
+        if existing_resort and existing_resort.id != self.id:
+            raise ValueError('Resort with same name already exists')
+        return value
 
 
 # class Recommendation(db.Model):

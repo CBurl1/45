@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from './context/user';
 
-function Home({ user, setUser }) {
+function Home() {
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/authorized')
@@ -21,6 +23,7 @@ function Home({ user, setUser }) {
   }
 
   console.log('user:', user);
+
 
   if (!user) {
     return (
@@ -42,7 +45,7 @@ function Home({ user, setUser }) {
       <div className="App">
         <header className="App-header">
           <h1>Welcome, {user.name} !</h1>
-          <p>The ski pass recommender</p>
+          <strong>The terrain park reviewer</strong>
           <body>
             <br></br>
             <button>

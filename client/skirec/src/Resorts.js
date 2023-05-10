@@ -4,12 +4,13 @@ function ResortsList() {
   const [resorts, setResorts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5555/skiresorts')
+    fetch('/skiresorts')
       .then(response => response.json())
       .then(data => setResorts(data));
   }, []);
 
   return (
+    <header className="App-header">
     <div>
       <h2>List of Resorts</h2>
       <ul>
@@ -20,6 +21,7 @@ function ResortsList() {
         ))}
       </ul>
     </div>
+    </header>
   );
 }
 
