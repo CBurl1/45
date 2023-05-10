@@ -109,11 +109,11 @@ class NewComment(Resource):
         try:
             data = request.get_json()
 
-            # query for the resort with the given name
-            resort = Resort.query.filter_by(name=data['resort']).first()
+            # query for the resort with the given id
+            resort = Resort.query.filter_by(id=data['resort']).first()
 
             # create the comment with the resort and user instances
-            comment = Comment(comment=data['comment'], user_id=data['user_id'], resort=resort)
+            comment = Comment(comment=data['comment'], user_id=data['user_id'], resort_id=resort.id)
             db.session.add(comment)
             db.session.commit()
 

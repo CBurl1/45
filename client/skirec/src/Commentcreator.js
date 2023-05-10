@@ -10,21 +10,26 @@ function CommentCreator() {
   useEffect(() => {
     fetch('/skiresorts')
       .then(response => response.json())
-      .then(data => setResorts(data));
+      .then(data => {
+        console.log('Fetched resorts:', data);
+        setResorts(data);
+      });
   }, []);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
   
     const selectedResortObj = resorts.find(resort => resort.id === selectedResort);
-    const resortName = selectedResortObj?.name || '';
-    const data = {
+    console.log(selectedResortObj);
+      const data = {
       comment: comment,
-      resort: resortName,
+      resort: selectedResort,
       user_id: user ? user.id : null
     };
-  
+    
     console.log('Sending data:', data);
+    
     const response = await fetch('/comments', {
       method: 'POST',
       headers: {
@@ -43,6 +48,8 @@ function CommentCreator() {
       alert('Error posting comment!');
     }
   };
+  
+  
   
   
   
