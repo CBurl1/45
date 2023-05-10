@@ -46,12 +46,14 @@ class User(db.Model):
 
 
 
-# class Resort(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String, nullable=False)
-#     location_region = db.Column(db.String, nullable=False)
-#     location_state = db.Column(db.String, nullable=False)
-#     passes = db.relationship('Pass', backref='resort')
+class Resort(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    location_region = db.Column(db.String, nullable=False)
+    location_state = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return f"<{self.name}, {self.location_region}, {self.location_state}>"
 
 # class Recommendation(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

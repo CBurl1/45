@@ -9,19 +9,6 @@ from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, api, db
 from models import User
 
-
-class Home(Resource):
-    def get(self):
-        return "Welcome to the homepage"
-
-api.add_resource(Home, '/home')
-
-class Account(Resource):
-    def get(self):
-        return "View account info here"
-
-api.add_resource(Account, '/account')
-
 class Passes(Resource):
     def get(self):
         return "View passes here"
