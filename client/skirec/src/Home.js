@@ -8,36 +8,38 @@ function Home({ user, setUser }) {
       .then(response => response.json())
       .then(data => setUser(data))
       .catch(error => console.error(error));
-  }, [user]);
+  }, []);
 
-  
   function handleLogout() {
+    console.log('logging out...');
     fetch('/logout', { method: 'DELETE' })
       .then(() => {
+        console.log('logged out successfully');
         setUser(null);
       })
       .catch(error => console.error(error));
   }
-  
+
+  console.log('user:', user);
 
   if (!user) {
-      return (
-        <div>
-          <header className="App-header">
-            <h1>Welcome to the Ski Pass Recommender !</h1>
-            <button>
-              <Link to="/signup">Signup:</Link>{' '}
-            </button>
-            <button>
-              <Link to="/login">Login:</Link>{' '}
-            </button>
-          </header>
-          {user === null && <p>You have been logged out</p>}
-        </div>
-      );
+    return (
+      <div>
+        <header className="App-header">
+          <h1>Welcome to the Ski Pass Recommender !</h1>
+          <button>
+            <Link to="/signup">Signup:</Link>{' '}
+          </button>
+          <button>
+            <Link to="/login">Login:</Link>{' '}
+          </button>
+        </header>
+        {user === null && <p>You have been logged out</p>}
+      </div>
+    );
   } else {
     return (
-    <div className="App">
+      <div className="App">
         <header className="App-header">
           <h1>Welcome, {user.name} !</h1>
           <p>The ski pass recommender</p>
@@ -59,7 +61,7 @@ function Home({ user, setUser }) {
           </body>
         </header>
       </div>
-      );
+    );
   }
 }
 
