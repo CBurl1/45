@@ -29,7 +29,7 @@ function Home() {
     return (
       <div>
         <header className="App-header">
-          <h1>Welcome to the Ski Pass Recommender !</h1>
+          <h1>Terrain Park Info!</h1>
           <button>
             <Link to="/signup">Signup:</Link>{' '}
           </button>

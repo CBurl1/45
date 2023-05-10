@@ -4,10 +4,11 @@ import Login from './Login.js';
 import Resorts from './Resorts.js';
 import Yourcomments from './Yourcomments.js';
 import CommentCreator from './Commentcreator.js';
-import Home from './Home.js'
+import Home from './Home.js';
 import React, { useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/user';
+import Navbar from './Navbar';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ function App() {
   return (
     <UserProvider value={{ user, setUser }}>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -29,5 +31,6 @@ function App() {
 }
 
 export default App;
+
 
 
