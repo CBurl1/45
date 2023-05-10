@@ -125,6 +125,25 @@ class NewComment(Resource):
 
 api.add_resource(NewComment, '/comments')
 
+class ModifyComment(Resource):
+    def patch(self, comment_id):
+        try:
+            data = request.get_json()
+
+            # find the comment with the given id
+            comment = Comment.query.get(comment_id)
+
+            # update the comment text
+            comment.comment = data['comment']
+
+            db.session.commit()
+
+            return make_response(comment.to_dict(), 200)
+        except Exception as e:
+            traceback.print_exc()
+            return make_response({'error': str(e)}, 500)
+api.add_resource(ModifyComment, '/changecomment/<int:comment_id>')
+
 if __name__ == '__main__':
     app.run(port=5555)
 
