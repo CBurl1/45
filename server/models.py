@@ -53,7 +53,7 @@ class Resort(db.Model):
     location_state = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return f"<{self.name}, {self.location_region}, {self.location_state}>"
+        return f"<Name:{self.name}, Region:{self.location_region}, State/Province:{self.location_state}>"
 
 # class Recommendation(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
