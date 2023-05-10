@@ -2,30 +2,13 @@
 from flask import Flask, request, make_response, session, abort, jsonify
 from flask_restful import Resource
 from werkzeug.exceptions import NotFound, Unauthorized
+import json
 
 
 
 # Local imports
 from config import app, api, db
-from models import User
-
-class Passes(Resource):
-    def get(self):
-        return "View passes here"
-
-api.add_resource(Passes, '/passes')
-
-class SkiResorts(Resource):
-    def get(self):
-        return "View resorts here"
-
-api.add_resource(SkiResorts, '/resorts')
-
-class PassRec(Resource):
-    def get(self):
-        return "View your recommendation here"
-
-api.add_resource(PassRec, '/passrec')
+from models import User, Resort
 
 class Users(Resource):
     def post(self):
@@ -95,6 +78,25 @@ class Signup (Resource):
         return response
 
 api.add_resource(Signup, '/signup')
+
+
+class SkiResorts(Resource):
+    def get(self):
+        resorts = Resort.query.all()
+        resort_list = []
+        for resort in resorts:
+            resort_dict = {
+                'id': resort.id,
+                'name': resort.name,
+                'location_region': resort.location_region,
+                'location_state': resort.location_state
+            }
+            resort_list.append(resort_dict)
+        return resort_list, 200
+
+api.add_resource(SkiResorts, '/skiresorts')
+
+
 
 if __name__ == '__main__':
     app.run(port=5555)

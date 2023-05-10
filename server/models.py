@@ -7,9 +7,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 # from werkzeug.security import generate_password_hash, check_password_hash
 from config import db, bcrypt
 
-class User(db.Model):
+class User(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
-
     name = db.Column(db.String)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
@@ -47,13 +46,13 @@ class User(db.Model):
 
 
 class Resort(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    location_region = db.Column(db.String, nullable=False)
-    location_state = db.Column(db.String, nullable=False)
+    __tablename__ = 'resorts'
 
-    def __repr__(self):
-        return f"<Name:{self.name}, Region:{self.location_region}, State/Province:{self.location_state}>"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    location_region = db.Column(db.String(100), nullable=False)
+    location_state = db.Column(db.String(100), nullable=False)
+
 
 # class Recommendation(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

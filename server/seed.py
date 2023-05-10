@@ -1,7 +1,14 @@
-from config import db
-from models import Resort
 
-resorts = [
+# Remote library imports
+# Local imports
+from app import app
+from models import db, Resort
+
+
+with app.app_context():
+    
+
+    resorts = [
     Resort(name='Sunday River', location_region="USA East", location_state="ME"),
     Resort(name='Sugarloaf', location_region="USA East", location_state="ME"),
     Resort(name='Sugarbush', location_region="USA East", location_state="VT"),

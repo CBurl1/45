@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function Resorts() {
-  const [searchText, setSearchText] = useState('');
+function ResortsList() {
+  const [resorts, setResorts] = useState([]);
 
-  const handleSearchChange = (event) => {
-    setSearchText(event.target.value);
-  };
+  useEffect(() => {
+    fetch('http://localhost:5555/skiresorts')
+      .then(response => response.json())
+      .then(data => setResorts(data));
+  }, []);
 
   return (
     <div>
-      <h1>Resorts</h1>
-      <form>
-        <label>
-          Search:
-          <input type="text" value={searchText} onChange={handleSearchChange} />
-        </label>
-        <button type="submit">Search</button>
-      </form>
-      <p>Results for: {searchText}</p>
-      {/* Display search results */}
+      <h2>List of Resorts</h2>
+      <ul>
+        {resorts.map(resort => (
+          <li key={resort.id}>
+            <strong>{resort.name}</strong> - {resort.location_region}, {resort.location_state}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default Resorts;
+export default ResortsList;
+
