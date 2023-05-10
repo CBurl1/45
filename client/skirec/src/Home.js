@@ -34,7 +34,7 @@ function Home({ user, setUser }) {
             <Link to="/login">Login:</Link>{' '}
           </button>
         </header>
-        {user === null && <p>You have been logged out</p>}
+        {user === null}
       </div>
     );
   } else {
