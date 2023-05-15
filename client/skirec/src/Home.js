@@ -37,7 +37,7 @@ function Home() {
             <Link to="/login">Login:</Link>{' '}
           </button>
         </header>
-        {user === null}
+        <p>Please log in to access the content.</p>
       </div>
     );
   } else {
