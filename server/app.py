@@ -112,8 +112,15 @@ class NewComment(Resource):
             # query for the resort with the given id
             resort = Resort.query.filter_by(id=data['resort']).first()
 
+            # retrieve user information from the session cookie
+            user_id = session.get('user_id')
+            # You can retrieve other user information as needed from the session
+
+            if not user_id:
+                return make_response({'error': 'User not authenticated'}, 500)
+
             # create the comment with the resort and user instances
-            comment = Comment(comment=data['comment'], user_id=data['user_id'], resort_id=resort.id)
+            comment = Comment(comment=data['comment'], user_id=user_id, resort_id=resort.id)
             db.session.add(comment)
             db.session.commit()
 
@@ -121,6 +128,8 @@ class NewComment(Resource):
         except Exception as e:
             traceback.print_exc()
             return make_response({'error': str(e)}, 500)
+
+
 
 
 api.add_resource(NewComment, '/comments')
