@@ -11,6 +11,7 @@ function Signup() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    
     if (name.trim() === '') {
       setError('Name cannot be empty');
       return;

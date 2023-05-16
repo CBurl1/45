@@ -1,14 +1,18 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/user';
 
 function Home() {
   const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/authorized')
       .then(response => response.json())
-      .then(data => setUser(data))
+      .then(data => {
+        setUser(data);
+        setLoading(false);
+      })
       .catch(error => console.error(error));
   }, []);
 
@@ -24,6 +28,9 @@ function Home() {
 
   console.log('user:', user);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (!user) {
     return (
@@ -44,7 +51,7 @@ function Home() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Welcome, {user.name} !</h1>
+          <h1>Welcome, {user.name}!</h1>
           <strong>Comment on the state of terrain parks and let other users know about changes that the park crew has made</strong>
           <body>
             <br></br>
