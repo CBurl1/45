@@ -18,7 +18,7 @@ function Login() {
         if (response.ok) {
           setRedirectToHome(true);
         } else {
-          console.log('Invalid Username or Password - Please Try Again');
+          window.alert('Invalid Username or Password - Please Try Again');
         }
       });
   }

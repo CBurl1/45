@@ -1,7 +1,7 @@
 import './App.css';
 import Signup from './Signup.js';
 import Login from './Login.js';
-import Resorts from './Resorts.js';
+import Resortusers from './Resortusers.js';
 import Yourcomments from './Yourcomments.js';
 import CommentCreator from './Commentcreator.js';
 import Home from './Home.js';
@@ -23,7 +23,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/comment-creator" element={<CommentCreator />} />
           <Route path="/your-comments" element={<Yourcomments />} />
-          <Route path="/resorts" element={<Resorts />} />
+          <Route path="/resortusers" element={<Resortusers />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>
