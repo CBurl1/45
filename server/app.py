@@ -83,17 +83,18 @@ api.add_resource(Signup, '/signup')
 
 class SkiResorts(Resource):
     def get(self):
-        resorts = Resort.query.all()
-        resort_list = []
-        for resort in resorts:
-            resort_dict = {
-                'id': resort.id,
-                'name': resort.name,
-                'location_region': resort.location_region,
-                'location_state': resort.location_state
-            }
-            resort_list.append(resort_dict)
-        return resort_list, 200
+        resort_list = [resort.to_dict() for resort in Resort.query.all()]
+        # resorts = Resort.query.all()
+        # resort_list = []
+        # for resort in resorts:
+        #     resort_dict = {
+        #         'id': resort.id,
+        #         'name': resort.name,
+        #         'location_region': resort.location_region,
+        #         'location_state': resort.location_state
+        #     }
+        #     resort_list.append(resort_dict)
+        return make_response(resort_list, 200)
 
 api.add_resource(SkiResorts, '/skiresorts')
 
@@ -167,6 +168,19 @@ class DeleteComment(Resource):
             return make_response({'error': str(e)}, 500)
         
 api.add_resource(DeleteComment, '/deletecomment/<int:comment_id>')
+
+# Resorts has many users through comments
+
+# class ShowUsersofResort(Resource):
+#     def get(self, resort_id):
+#         resort = Resort.query.get(resort_id)
+#         if resort is None:
+#             return jsonify({'error': 'Resort not found'}), 404
+
+#         users = [comment.user.to_dict() for comment in resort.comments if comment.user is not None]
+#         return jsonify(users), 200
+    
+# api.add_resource(ShowUsersofResort, '/resorts/<int:resort_id>/users')
 
 if __name__ == '__main__':
     app.run(port=5555)

@@ -7,24 +7,24 @@ from sqlalchemy.ext.hybrid import hybrid_property
 # from werkzeug.security import generate_password_hash, check_password_hash
 from config import db, bcrypt
 
-class User(db.Model, SerializerMixin):    
+class User(db.Model, SerializerMixin):
+    __tablename__ = 'users'
+
+    serialize_rules = ('-comments', '-password')
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
+    resorts = association_proxy("comments", "resort")
     comments = db.relationship('Comment', backref='user')
-    serialize_rules = ('-comments.user', '-password')
 
-    # budget = db.Column(db.Float, nullable=False)
-    # location_region = db.Column(db.String, nullable=False)
-    # location_state = db.Column(db.String, nullable=False)
-    # recommendations = db.relationship('Recommendation', backref='user')
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email
-        }
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'email': self.email
+    #     }
 
     @hybrid_property
     def password_hash(self):
@@ -47,13 +47,24 @@ class User(db.Model, SerializerMixin):
 
 
 class Resort(db.Model, SerializerMixin):
+    __tablename__ = 'resorts'
+    serialize_rules = ('-comments','users', '-users._password_hash', 'users')
+
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     location_region = db.Column(db.String, nullable=False)
     location_state = db.Column(db.String, nullable=False)
+    users = association_proxy("comments", "user")
     comments = db.relationship('Comment', backref='resort')
-    serialize_rules = ('-comment.resort',)
+
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'location_region': self.location_region,
+    #         'location_state': self.location_state
+    #     }
 
 
     @validates('name')
@@ -66,13 +77,23 @@ class Resort(db.Model, SerializerMixin):
         return value
 
 class Comment(db.Model, SerializerMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    resort_id = db.Column(db.Integer, db.ForeignKey('resort.id'))
+    __tablename__ = 'comments'
+
+
     serialize_rules = ('-user.comments', '-resort.comments')
 
 
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    resort_id = db.Column(db.Integer, db.ForeignKey('resorts.id'))
+
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'comment': self.comment,
+    #         'user': self.user.to_dict()
+    #     }
 
 
 
