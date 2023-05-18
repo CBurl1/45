@@ -55,6 +55,7 @@ class Resort(db.Model, SerializerMixin):
     name = db.Column(db.String)
     location_region = db.Column(db.String, nullable=False)
     location_state = db.Column(db.String, nullable=False)
+    image = db.Column(db.String)
     users = association_proxy("comments", "user")
     comments = db.relationship('Comment', backref='resort')
 
@@ -84,7 +85,8 @@ class Comment(db.Model, SerializerMixin):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String)
+    comment = db.Column(db.String, nullable = False)
+    comment_image = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     resort_id = db.Column(db.Integer, db.ForeignKey('resorts.id'))
 
