@@ -20,3 +20,17 @@
 body {
   background-color: #2196F3 !important;
 }
+
+.btn-custom {
+  background-color: white !important;
+  color: black;
+}
+
+.text-link {
+  color: black;
+}
+
+.logout-text {
+  color: black;
+}
+

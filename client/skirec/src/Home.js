@@ -1,9 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/user';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
 function Home() {
   const { user, setUser } = useContext(UserContext);
+  const [resorts, setResorts] = useState([]);
 
   useEffect(() => {
     fetch('/authorized')
@@ -21,8 +23,12 @@ function Home() {
         console.error(error);
         setUser(null); // Set user to null if there was an error
       });
+
+    fetch('/skiresorts')
+      .then(response => response.json())
+      .then(data => setResorts(data))
+      .catch(error => console.log(error));
   }, []);
-  
 
   function handleLogout() {
     console.log('logging out...');
@@ -34,48 +40,81 @@ function Home() {
       .catch(error => console.error(error));
   }
 
-  console.log('user:', user);
-
-  if (user) {
-    return (
-      <div className="App">
+  return (
+    <Container className="App">
       <header className="App-header">
-        <h1>Welcome, {user.name}!</h1>
-        <strong>Comment on the state of terrain parks and let other users know about changes that the park crew has made</strong>
-        <body>
-          <br></br>
-          <button>
-            <Link to="/comment-creator">Make a Comment:</Link>{' '}
-          </button>
-          <br></br>
-          <button>
-            <Link to="/your-comments">View Your Comments:</Link>{' '}
-          </button>
-          <br></br>
-          <button>
-            <Link to="/resortusers">View who is commenting on each resort:</Link>{' '}
-          </button>
-          <br></br>
-          <button onClick={handleLogout}>Logout</button>
-        </body>
+        <h1>Welcome, {user ? user.name : 'Terrain Park Info!'}</h1>
+        <strong>
+          Comment on the state of terrain parks and let other users know about changes that the park crew has made
+        </strong>
+        <Row>
+          <Col>
+            {user ? (
+              <Button variant="primary" className="my-2 btn-custom">
+                <Link to="/comment-creator" className="text-link">
+                  Make a Comment
+                </Link>
+              </Button>
+            ) : null}
+          </Col>
+          <Col>
+            {user ? (
+              <Button variant="primary" className="my-2 btn-custom">
+                <Link to="/your-comments" className="text-link">
+                  View Your Comments
+                </Link>
+              </Button>
+            ) : null}
+          </Col>
+          <Col>
+            {user ? (
+              <Button variant="primary" className="my-2 btn-custom">
+                <Link to="/resortusers" className="text-link">
+                  View who is commenting on each resort
+                </Link>
+              </Button>
+            ) : null}
+          </Col>
+          <Col>
+            {user ? (
+              <Button variant="primary" className="my-2 btn-custom" onClick={handleLogout}>
+                <span className="logout-text">Logout</span>
+              </Button>
+            ) : (
+              <div>
+                <Button variant="primary" className="my-2 btn-custom">
+                  <Link to="/signup" className="text-link">
+                    Signup
+                  </Link>
+                </Button>
+                <Button variant="primary" className="my-2 btn-custom">
+                  <Link to="/login" className="text-link">
+                    Login
+                  </Link>
+                </Button>
+              </div>
+            )}
+          </Col>
+        </Row>
+
+        <hr />
+
+        <h2>Supported Resorts</h2>
+        <Row>
+          {resorts.map(resort => (
+            <Col md={4} key={resort.id}>
+              <Card>
+                <Card.Img variant="top" src={resort.image} alt={resort.name} />
+                <Card.Body>
+                  <Card.Title>{resort.name}</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </header>
-    </div>
+    </Container>
   );
-  } else {
-    return (
-            <div>
-        <header className="App-header">
-          <h1>Terrain Park Info!</h1>
-          <button>
-            <Link to="/signup">Signup:</Link>{' '}
-          </button>
-          <button>
-            <Link to="/login">Login:</Link>{' '}
-          </button>
-        </header>
-      </div>
-    );
-  }
 }
 
 export default Home;
