@@ -83,8 +83,8 @@ function UserComments() {
             <div>
               <p>Resort: {comment.resort.name}</p>
               <p>Comment: {comment.comment}</p>
-              <button onClick={() => handleEditComment(comment)}>Edit</button>
-              <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+              <button onClick={() => handleEditComment(comment)}>✏️</button>
+              <button onClick={() => handleDeleteComment(comment.id)}>🗑️🚮</button>
             </div>
           )}
         </div>
