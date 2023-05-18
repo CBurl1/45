@@ -1,8 +1,8 @@
-"""table names
+"""image coloumns added
 
-Revision ID: 2f61a3719f60
+Revision ID: 1981449843e8
 Revises: 
-Create Date: 2023-05-17 11:47:44.972905
+Create Date: 2023-05-18 13:38:56.438119
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2f61a3719f60'
+revision = '1981449843e8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('location_region', sa.String(), nullable=False),
     sa.Column('location_state', sa.String(), nullable=False),
+    sa.Column('image', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
@@ -34,7 +35,8 @@ def upgrade():
     )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('comment', sa.String(), nullable=True),
+    sa.Column('comment', sa.String(), nullable=False),
+    sa.Column('comment_image', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('resort_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['resort_id'], ['resorts.id'], name=op.f('fk_comments_resort_id_resorts')),

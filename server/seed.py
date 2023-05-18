@@ -10,18 +10,8 @@ with app.app_context():
     print("Deleting data...")
 
     Resort.query.delete()
-    User.query.delete()
     Comment.query.delete()
 
-    print("Creating Users...")
-
-    u1 = User(name = "Collin", email="collin@flatiron.com", password = "collin")
-    u2 = User(name="Emily", email="emily@flatiron.com", password="emily")
-    u3 = User(name="Alex", email="alex@flatiron.com", password="alex")
-    u4 = User(name="Sophia", email="sophia@flatiron.com", password="sophia")
-    u5 = User(name="Jacob", email="jacob@flatiron.com", password="jacob")
-
-    users = [u1, u2, u3, u4, u5]
 
     print("Creating Resorts...")
 
@@ -92,7 +82,6 @@ with app.app_context():
 
     comments = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52]
     
-    db.session.add_all(users)
     db.session.add_all(resorts)
     db.session.add_all(comments)
     db.session.commit()
