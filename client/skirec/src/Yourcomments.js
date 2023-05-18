@@ -83,6 +83,7 @@ function UserComments() {
             <div>
               <p>Resort: {comment.resort.name}</p>
               <p>Comment: {comment.comment}</p>
+              {comment.comment_image && <img src={comment.comment_image} alt="Comment Image" />}
               <button onClick={() => handleEditComment(comment)}>✏️</button>
               <button onClick={() => handleDeleteComment(comment.id)}>🗑️🚮</button>
             </div>
@@ -94,5 +95,6 @@ function UserComments() {
 }
 
 export default UserComments;
+
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './context/user';
 
 function CommentCreator() {
@@ -6,6 +6,7 @@ function CommentCreator() {
   const [comment, setComment] = useState('');
   const [selectedResort, setSelectedResort] = useState('');
   const [resorts, setResorts] = useState([]);
+  const [commentImageLink, setCommentImageLink] = useState('');
 
   useEffect(() => {
     fetch('/skiresorts')
@@ -15,21 +16,22 @@ function CommentCreator() {
         setResorts(data);
       });
   }, []);
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const selectedResortObj = resorts.find(resort => resort.id === selectedResort);
     console.log(selectedResortObj);
-      const data = {
+
+    const data = {
       comment: comment,
       resort: selectedResort,
-      user_id: user ? user.id : null
+      user_id: user ? user.id : null,
+      commentImageLink: commentImageLink
     };
-    
+
     console.log('Sending data:', data);
-    
+
     const response = await fetch('/comments', {
       method: 'POST',
       headers: {
@@ -37,24 +39,17 @@ function CommentCreator() {
       },
       body: JSON.stringify(data)
     });
-  
+
     if (response.ok) {
-      const responseData = await response.text();
-      const json = JSON.parse(responseData);
       setComment('');
       setSelectedResort('');
+      setCommentImageLink('');
       alert('Comment successfully posted!');
     } else {
       alert('Error posting comment!');
     }
   };
-  
-  
-  
-  
-  
-  
-  
+
   return (
     <div>
       <h2>Make a comment, {user && user.name}</h2>
@@ -85,6 +80,16 @@ function CommentCreator() {
               </option>
             ))}
           </select>
+        </div>
+        <div>
+          <label htmlFor="commentImageLink">Comment Image Link:</label>
+          <input
+            type="text"
+            id="commentImageLink"
+            name="commentImageLink"
+            value={commentImageLink}
+            onChange={(event) => setCommentImageLink(event.target.value)}
+          />
         </div>
         <button type="submit">Submit</button>
       </form>
