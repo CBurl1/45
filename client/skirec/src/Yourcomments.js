@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './context/user';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
 function UserComments() {
   const { user } = useContext(UserContext);
@@ -66,35 +67,44 @@ function UserComments() {
   };
 
   return (
-    <div>
+    <Container>
       <h2>{user.name}'s Comments</h2>
       {comments.map((comment) => (
-        <div key={comment.id}>
-          {editingComment?.id === comment.id ? (
-            <div>
-              <textarea
-                value={editedCommentText}
-                onChange={(e) => setEditedCommentText(e.target.value)}
-              />
-              <button onClick={handleCancelEdit}>Cancel</button>
-              <button onClick={handleSaveEdit}>Save</button>
+        <Card key={comment.id} className="my-4">
+          <Card.Body>
+            <div className="d-flex justify-content-end mb-2">
+              <Button variant="primary" className="mr-2" onClick={() => handleEditComment(comment)}>
+                Edit
+              </Button>
+              <Button variant="danger" onClick={() => handleDeleteComment(comment.id)}>
+                Delete
+              </Button>
             </div>
-          ) : (
-            <div>
-              <p>Resort: {comment.resort.name}</p>
-              <p>Comment: {comment.comment}</p>
-              {comment.comment_image && <img src={comment.comment_image} alt="Comment Image" />}
-              <button onClick={() => handleEditComment(comment)}>✏️</button>
-              <button onClick={() => handleDeleteComment(comment.id)}>🗑️🚮</button>
-            </div>
-          )}
-        </div>
+            {editingComment?.id === comment.id ? (
+              <div>
+                <textarea
+                  value={editedCommentText}
+                  onChange={(e) => setEditedCommentText(e.target.value)}
+                />
+                <Button variant="secondary" className="mr-2" onClick={handleCancelEdit}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={handleSaveEdit}>
+                  Save
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <p><strong>Resort:</strong> {comment.resort.name}</p>
+                <p><strong>Comment:</strong> {comment.comment}</p>
+                {comment.comment_image && <img src={comment.comment_image} alt="Comment Image" />}
+              </div>
+            )}
+          </Card.Body>
+        </Card>
       ))}
-    </div>
+    </Container>
   );
 }
 
 export default UserComments;
-
-
-

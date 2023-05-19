@@ -10,7 +10,6 @@ function CustomNavbar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
-          {/* Add more Nav.Link components for additional navigation items */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

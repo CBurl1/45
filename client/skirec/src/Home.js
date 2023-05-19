@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/user';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import './Home.css'; // Import the CSS file for additional styles
 
 function Home() {
   const { user, setUser } = useContext(UserContext);
@@ -43,11 +44,12 @@ function Home() {
   return (
     <Container className="App">
       <header className="App-header">
-        <h1>Welcome, {user ? user.name : 'Terrain Park Info!'}</h1>
-        <strong>
-          Comment on the state of terrain parks and let other users know about changes that the park crew has made
-        </strong>
-        <Row>
+            <h1 className="welcome-message">Welcome, {user ? user.name : 'Terrain Park Info!'}</h1>
+      <strong className="description">
+        Comment on the state of terrain parks and let other users know about changes that the park crew has made
+      </strong>
+
+        <Row className="button-row">
           <Col>
             {user ? (
               <Button variant="primary" className="my-2 btn-custom">
@@ -100,13 +102,17 @@ function Home() {
         <hr />
 
         <h2>Supported Resorts</h2>
-        <Row>
+        <Row className="resort-row">
           {resorts.map(resort => (
-            <Col md={4} key={resort.id}>
+            <Col md={4} key={resort.id} className="resort-col">
               <Card>
-                <Card.Img variant="top" src={resort.image} alt={resort.name} />
+                <div className="resort-image">
+                  <Card.Img variant="top" src={resort.image} alt={resort.name} />
+                </div>
                 <Card.Body>
-                  <Card.Title>{resort.name}</Card.Title>
+                  <Card.Title>
+                    <div className="resort-text">{resort.name}</div>
+                  </Card.Title>
                 </Card.Body>
               </Card>
             </Col>

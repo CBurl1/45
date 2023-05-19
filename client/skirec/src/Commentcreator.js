@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from './context/user';
+import { Container, Form, Button } from 'react-bootstrap';
 
 function CommentCreator() {
   const { user } = useContext(UserContext);
@@ -10,8 +11,8 @@ function CommentCreator() {
 
   useEffect(() => {
     fetch('/skiresorts')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log('Fetched resorts:', data);
         setResorts(data);
       });
@@ -20,14 +21,14 @@ function CommentCreator() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const selectedResortObj = resorts.find(resort => resort.id === selectedResort);
+    const selectedResortObj = resorts.find((resort) => resort.id === selectedResort);
     console.log(selectedResortObj);
 
     const data = {
       comment: comment,
       resort: selectedResort,
       user_id: user ? user.id : null,
-      commentImageLink: commentImageLink
+      commentImageLink: commentImageLink,
     };
 
     console.log('Sending data:', data);
@@ -35,9 +36,9 @@ function CommentCreator() {
     const response = await fetch('/comments', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     if (response.ok) {
@@ -51,50 +52,50 @@ function CommentCreator() {
   };
 
   return (
-    <div>
+    <Container>
       <h2>Make a comment, {user && user.name}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="comment">Comment:</label>
-          <textarea
-            id="comment"
-            name="comment"
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="comment">
+          <Form.Label>Comment:</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={4}
             value={comment}
             onChange={(event) => setComment(event.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="resort">Resort:</label>
-          <select
-            id="resort"
-            name="resort"
+        </Form.Group>
+        <Form.Group controlId="resort">
+          <Form.Label>Resort:</Form.Label>
+          <Form.Control
+            as="select"
             value={selectedResort}
             onChange={(event) => setSelectedResort(event.target.value)}
             required
           >
             <option value="">Select a resort</option>
-            {resorts.map(resort => (
+            {resorts.map((resort) => (
               <option key={resort.id} value={resort.id}>
                 {resort.name}, {resort.location_state}, {resort.location_region}
               </option>
             ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="commentImageLink">Comment Image Link:</label>
-          <input
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="commentImageLink">
+          <Form.Label>Comment Image Link:</Form.Label>
+          <Form.Control
             type="text"
-            id="commentImageLink"
-            name="commentImageLink"
             value={commentImageLink}
             onChange={(event) => setCommentImageLink(event.target.value)}
           />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Container>
   );
 }
 
 export default CommentCreator;
+
