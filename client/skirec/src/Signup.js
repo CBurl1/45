@@ -39,6 +39,7 @@ function Signup() {
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <div className="w-100" style={{ maxWidth: '400px' }}>
+        <h1 className="text-center mb-4 signup-heading" style={{ fontSize: '100px', paddingBottom: '50px' }}>Signup</h1> {/* Modified Signup heading */}
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="email">
@@ -61,3 +62,5 @@ function Signup() {
 }
 
 export default Signup;
+
+

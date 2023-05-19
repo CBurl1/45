@@ -31,6 +31,7 @@ function Login() {
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <div className="w-100" style={{ maxWidth: '400px' }}>
+        <h1 className="text-center mb-4 login-heading" style={{ fontSize: '100px', paddingBottom: '50px' }}>Login</h1> {/* Modified Login heading */}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="username">
             <Form.Label>Username:</Form.Label>
@@ -48,6 +49,7 @@ function Login() {
 }
 
 export default Login;
+
 
 
 
