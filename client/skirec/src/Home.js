@@ -44,10 +44,6 @@ function Home() {
   return (
     <Container className="App">
       <header className="App-header">
-        {!user && (
-          <h1 className="welcome-message">Terrain Park Info</h1>
-        )}
-
         {user && (
           <>
             <h1 className="welcome-message">Welcome, {user.name}</h1>
