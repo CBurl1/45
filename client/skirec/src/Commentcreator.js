@@ -9,6 +9,8 @@ function CommentCreator() {
   const [resorts, setResorts] = useState([]);
   const [commentImageLink, setCommentImageLink] = useState('');
 
+  // fetch resorts for dropdown menu
+
   useEffect(() => {
     fetch('/skiresorts')
       .then((response) => response.json())
@@ -32,6 +34,8 @@ function CommentCreator() {
     };
 
     console.log('Sending data:', data);
+
+    // post to backend for new comment creation
 
     const response = await fetch('/comments', {
       method: 'POST',

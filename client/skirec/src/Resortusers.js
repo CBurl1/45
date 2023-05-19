@@ -4,12 +4,16 @@ import { Container, Row, Col, ListGroup, Image } from 'react-bootstrap';
 const ResortUsers = () => {
   const [resorts, setResorts] = useState([]);
 
+  // fetch ski resorts
+
   useEffect(() => {
     fetch('/skiresorts')
       .then(response => response.json())
       .then(data => setResorts(data))
       .catch(error => console.log(error));
   }, []);
+
+// map through resorts for info including user info to satisfy has many through
 
   return (
     <Container>

@@ -12,3 +12,5 @@ function UserProvider({ children }) {
 }
   
   export { UserContext, UserProvider };
+
+  // useContext

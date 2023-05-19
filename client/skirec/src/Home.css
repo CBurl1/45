@@ -64,23 +64,23 @@
 
 .resort-col {
   width: 100%;
-  height: 300px; /* Adjust this value to your desired card height */
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  padding: 1rem; /* Add padding to create some space between the border and the content */
+  padding: 1rem; 
 }
 
 .resort-text {
-  border: 5px solid #333; /* Set the border color to dark gray */
+  border: 5px solid #333;
   padding: 1rem;
 }
 
 .resort-image {
   width: 100%;
-  height: 200px; /* Adjust this value to your desired image height */
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;

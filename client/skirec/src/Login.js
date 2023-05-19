@@ -10,6 +10,8 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    // post for login
+
     fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -19,6 +21,7 @@ function Login() {
         if (response.ok) {
           setRedirectToHome(true);
         } else {
+          // frontend validation for incorrect password and username combination
           window.alert('Invalid Username or Password - Please Try Again');
         }
       });

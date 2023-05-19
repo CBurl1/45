@@ -5,6 +5,7 @@ import Resortusers from './Resortusers.js';
 import Yourcomments from './Yourcomments.js';
 import CommentCreator from './Commentcreator.js';
 import Home from './Home.js';
+import Allcomments from './Allcomments.js'
 import React, { useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/user';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/comment-creator" element={<CommentCreator />} />
           <Route path="/your-comments" element={<Yourcomments />} />
           <Route path="/resortusers" element={<Resortusers />} />
+          <Route path="/feed" element={<Allcomments />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

@@ -12,10 +12,14 @@ function Signup() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    // front end validation for empty name
+
     if (name.trim() === '') {
       setError('Name cannot be empty');
       return;
     }
+
+    // post to make a new user
 
     fetch('/signup', {
       method: 'POST',

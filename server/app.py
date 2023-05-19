@@ -171,6 +171,23 @@ class DeleteComment(Resource):
         
 api.add_resource(DeleteComment, '/deletecomment/<int:comment_id>')
 
+class ShowAllComments(Resource):
+    def get(self):
+        comments = Comment.query.all()
+        comments_data = []
+        for comment in comments:
+            comment_data = {
+                'id': comment.id,
+                'comment': comment.comment,
+                'comment_image': comment.comment_image,
+                'user_name': comment.user.name,
+                'resort_name': comment.resort.name
+            }
+            comments_data.append(comment_data)
+        return jsonify(comments_data)
+
+api.add_resource(ShowAllComments, '/showcomments')
+
 # Resorts has many users through comments
 
 # class ShowUsersofResort(Resource):

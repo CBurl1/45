@@ -54,6 +54,15 @@ function Home() {
         )}
 
         <Row className="button-row">
+        <Col>
+            {user ? (
+              <Button variant="primary" className="my-2 btn-custom">
+                <Link to="/feed" className="text-link">
+                  See the Feed
+                </Link>
+              </Button>
+            ) : null}
+          </Col>
           <Col>
             {user ? (
               <Button variant="primary" className="my-2 btn-custom">

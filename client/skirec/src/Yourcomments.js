@@ -9,6 +9,9 @@ function UserComments() {
   const [editingComment, setEditingComment] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState('');
 
+
+  // fetch comments for that user
+
   useEffect(() => {
     async function fetchUserComments() {
       const response = await fetch(`/user-comments/${user.id}`);
@@ -31,6 +34,7 @@ function UserComments() {
     setEditedCommentText('');
   };
 
+//patch for editing comments
   const handleSaveEdit = async () => {
     const response = await fetch(`/changecomment/${editingComment.id}`, {
       method: 'PATCH',
@@ -54,7 +58,7 @@ function UserComments() {
     setEditingComment(null);
     setEditedCommentText('');
   };
-
+// delete to remove a comment
   const handleDeleteComment = async (commentId) => {
     const response = await fetch(`/deletecomment/${commentId}`, {
       method: 'DELETE',
