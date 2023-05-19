@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Container } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 function Login() {
@@ -28,26 +29,27 @@ function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Log in</button>
-      </form>
-    </div>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="username">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </Form.Group>
+          <Button variant="primary" type="submit" block>Log in</Button>
+        </Form>
+      </div>
+    </Container>
   );
-
 }
 
 export default Login;
+
+
 
 
 

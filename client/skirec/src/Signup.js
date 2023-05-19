@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 function Signup() {
@@ -11,7 +12,6 @@ function Signup() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    
     if (name.trim() === '') {
       setError('Name cannot be empty');
       return;
@@ -26,7 +26,7 @@ function Signup() {
         if (response.ok) {
           setRedirect(true);
         } else {
-          window.alert('Sign up failed');
+          setError('Sign up failed');
         }
       })
       .catch(error => console.error(error));
@@ -37,27 +37,26 @@ function Signup() {
   }
 
   return (
-    <div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Username:
-          <input type="text" value={name} onChange={e => setName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Sign up</button>
-      </form>
-    </div>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+      <div className="w-100" style={{ maxWidth: '400px' }}>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="email">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+          </Form.Group>
+          <Form.Group controlId="name">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} required />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+          </Form.Group>
+          <Button variant="primary" type="submit" block>Sign up</Button>
+        </Form>
+      </div>
+    </Container>
   );
 }
 

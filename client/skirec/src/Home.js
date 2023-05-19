@@ -44,10 +44,18 @@ function Home() {
   return (
     <Container className="App">
       <header className="App-header">
-            <h1 className="welcome-message">Welcome, {user ? user.name : 'Terrain Park Info!'}</h1>
-      <strong className="description">
-        Comment on the state of terrain parks and let other users know about changes that the park crew has made
-      </strong>
+        {!user && (
+          <h1 className="welcome-message">Terrain Park Info</h1>
+        )}
+
+        {user && (
+          <>
+            <h1 className="welcome-message">Welcome, {user.name}</h1>
+            <strong className="description">
+              Comment on the state of terrain parks and let other users know about changes that the park crew has made
+            </strong>
+          </>
+        )}
 
         <Row className="button-row">
           <Col>
@@ -101,7 +109,7 @@ function Home() {
 
         <hr />
 
-        <h2>Supported Resorts</h2>
+        <h2 style={{ fontSize: '50px', fontWeight: 'bold', marginTop: '50px', marginBottom: '50px' }}>Supported Resorts</h2>
         <Row className="resort-row">
           {resorts.map(resort => (
             <Col md={4} key={resort.id} className="resort-col">
@@ -124,3 +132,4 @@ function Home() {
 }
 
 export default Home;
+
