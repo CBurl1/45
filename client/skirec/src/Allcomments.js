@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Card, ListGroup } from 'react-bootstrap';
 
 const CommentComponent = () => {
   const [comments, setComments] = useState([]);
@@ -28,37 +29,40 @@ const CommentComponent = () => {
       if (comment.resort_name !== currentResort) {
         currentResort = comment.resort_name;
         return (
-          <div key={comment.resort_name}>
-            <h2 style={{ fontSize: '24px' }}>{comment.resort_name}</h2>
-            <CommentList comment={comment} />
+          <div key={comment.resort_name} className="comment-group">
+            <h2 className="resort-name">{comment.resort_name}</h2>
+            <div className="comment-container">
+              <CommentList comment={comment} />
+            </div>
           </div>
         );
       } else {
-        return <CommentList key={comment.id} comment={comment} />;
+        return (
+          <div className="comment-container" key={comment.id}>
+            <CommentList comment={comment} />
+          </div>
+        );
       }
     });
   };
 
   const CommentList = ({ comment }) => (
-    <ul>
-      <li>
-        <div>Comment: {comment.comment}</div>
+    <Card style={{ marginBottom: '10px' }}>
+      <Card.Body>
+        <Card.Title>{comment.comment}</Card.Title>
         {comment.comment_image && (
-          <div>
-            Comment Image:
-            <img src={comment.comment_image} alt="Comment Image" />
-          </div>
+          <Card.Img src={comment.comment_image} alt="Comment Image" />
         )}
-        <div>User Name: {comment.user_name}</div>
-      </li>
-    </ul>
+        <Card.Text>{comment.user_name}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 
-  return <div>{renderCommentsByResort()}</div>;
+  return (
+    <div>
+      <ListGroup>{renderCommentsByResort()}</ListGroup>
+    </div>
+  );
 };
 
 export default CommentComponent;
-
-
-
-

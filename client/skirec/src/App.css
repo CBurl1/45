@@ -34,5 +34,20 @@ body {
   color: black;
 }
 
+.comment-container {
+  max-width: 600px; /* Set the maximum width for the comment container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.comment-group {
+  text-align: center;
+}
+
+.resort-name {
+  font-size: 50px;
+  margin-bottom: 35px;
+  margin-top: 35px;
+}
+
 
 
