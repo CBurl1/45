@@ -1,2 +1,2 @@
-# skirec
-full stack app that gives a recommendation for a ski pass
+# parki
+Full stack web application that allows skiers and snowboarders to stay up to date with terrain parks around them
