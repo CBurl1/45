@@ -40,7 +40,7 @@ function Home() {
       <header className="App-header">
         {user && (
           <>
-            <h1 className="welcome-message">Welcome, {user.name}</h1>
+            <h1 className="welcome-message">Welcome, {user.name.toUpperCase()}</h1>
             <strong className="description">
               Let the cards begin!
             </strong>
@@ -50,9 +50,21 @@ function Home() {
         <Row className="button-row">
           <Col className="button-col">
             {user ? (
-              <Button variant="primary" className="my-2 btn-custom logout-button" onClick={handleLogout}>
-                <span className="logout-text">Logout</span>
-              </Button>
+              <>
+                <Button variant="primary" className="my-2 btn-custom nav-button">
+                  <Link to="/gamerooms" className="text-link nav-link">
+                    Game Rooms
+                  </Link>
+                </Button>
+                <Button variant="primary" className="my-2 btn-custom nav-button">
+                  <Link to="/stats" className="text-link nav-link">
+                    Stats
+                  </Link>
+                </Button>
+                <Button variant="primary" className="my-2 btn-custom logout-button" onClick={handleLogout}>
+                  <span className="logout-text">Logout</span>
+                </Button>
+              </>
             ) : (
               <div className="auth-buttons">
                 <Button variant="primary" className="my-2 btn-custom">
@@ -80,5 +92,6 @@ function Home() {
 }
 
 export default Home;
+
 
 
