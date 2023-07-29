@@ -36,7 +36,7 @@ function Home() {
   }
 
   return (
-    <Container className="App">
+    <Container className="App home">
       <header className="App-header">
         {user && (
           <>
@@ -48,20 +48,20 @@ function Home() {
         )}
 
         <Row className="button-row">
-          <Col>
+          <Col className="button-col">
             {user ? (
-              <Button variant="primary" className="my-2 btn-custom" onClick={handleLogout}>
+              <Button variant="primary" className="my-2 btn-custom logout-button" onClick={handleLogout}>
                 <span className="logout-text">Logout</span>
               </Button>
             ) : (
-              <div>
+              <div className="auth-buttons">
                 <Button variant="primary" className="my-2 btn-custom">
-                  <Link to="/signup" className="text-link">
+                  <Link to="/signup" className="text-link signup-link">
                     Signup
                   </Link>
                 </Button>
                 <Button variant="primary" className="my-2 btn-custom">
-                  <Link to="/login" className="text-link">
+                  <Link to="/login" className="text-link login-link">
                     Login
                   </Link>
                 </Button>
@@ -70,9 +70,9 @@ function Home() {
           </Col>
         </Row>
 
-        <hr />
+        <hr className="divider" />
 
-        <h2>45</h2>
+        <h2 className="game-title">45</h2>
 
       </header>
     </Container>
@@ -80,4 +80,5 @@ function Home() {
 }
 
 export default Home;
+
 

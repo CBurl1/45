@@ -1,0 +1,84 @@
+.App {
+    text-align: center;
+    padding: 2em;
+    background: linear-gradient(to right, #2b5876, #4e4376);
+    min-height: 100vh;
+    color: white;
+  }
+  
+  .App-header {
+    padding: 1em 0;
+  }
+  
+  .welcome-message {
+    font-size: 2.5em;
+    margin: 0.5em;
+  }
+  
+  .description {
+    font-size: 1.5em;
+    margin: 0.5em;
+  }
+  
+  .button-row {
+    justify-content: center;
+    margin: 1em 0;
+  }
+  
+  .btn-custom {
+    margin: 0.5em;
+  }
+  
+  .text-link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  hr {
+    border-top: 1px solid white;
+    width: 50%;
+    margin: 2em auto;
+  }
+  
+  .home {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .button-col {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .logout-button {
+    background-color: #ff4c4c;
+    border-color: #ff4c4c;
+  }
+  
+  .logout-button:hover {
+    background-color: #cc0000;
+    border-color: #cc0000;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .signup-link {
+    color: #4caf50;
+  }
+  
+  .login-link {
+    color: #ff9800;
+  }
+  
+  .divider {
+    border-color: #fff3e0;
+  }
+  
+  .game-title {
+    color: #e91e63;
+    font-size: 3em;
+  }
+  
