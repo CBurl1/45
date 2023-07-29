@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/user';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import './Home.css';
 
 function Home() {
   const { user, setUser } = useContext(UserContext);
-  const [resorts, setResorts] = useState([]);
 
   useEffect(() => {
     fetch('/authorized')
@@ -23,12 +23,7 @@ function Home() {
         console.error(error);
         setUser(null);
       });
-
-    fetch('/skiresorts')
-      .then(response => response.json())
-      .then(data => setResorts(data))
-      .catch(error => console.log(error));
-  }, []);
+  },);
 
   function handleLogout() {
     console.log('logging out...');
@@ -77,7 +72,7 @@ function Home() {
 
         <hr />
 
-        <h2 style={{ fontSize: '50px', fontWeight: 'bold', marginTop: '50px', marginBottom: '50px' }}>45</h2>
+        <h2>45</h2>
 
       </header>
     </Container>
