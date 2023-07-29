@@ -53,42 +53,6 @@ function Home() {
         )}
 
         <Row className="button-row">
-        <Col>
-            {user ? (
-              <Button variant="primary" className="my-2 btn-custom">
-                <Link to="/feed" className="text-link">
-                  See the Feed
-                </Link>
-              </Button>
-            ) : null}
-          </Col>
-          <Col>
-            {user ? (
-              <Button variant="primary" className="my-2 btn-custom">
-                <Link to="/comment-creator" className="text-link">
-                  Make a Comment
-                </Link>
-              </Button>
-            ) : null}
-          </Col>
-          <Col>
-            {user ? (
-              <Button variant="primary" className="my-2 btn-custom">
-                <Link to="/your-comments" className="text-link">
-                  View Your Comments
-                </Link>
-              </Button>
-            ) : null}
-          </Col>
-          <Col>
-            {user ? (
-              <Button variant="primary" className="my-2 btn-custom">
-                <Link to="/resortusers" className="text-link">
-                  View who is commenting on each resort
-                </Link>
-              </Button>
-            ) : null}
-          </Col>
           <Col>
             {user ? (
               <Button variant="primary" className="my-2 btn-custom" onClick={handleLogout}>
