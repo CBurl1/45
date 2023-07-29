@@ -5,6 +5,7 @@ import React, { useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/user';
 import Navbar from './Navbar.js';
+import CreateGameRoom from './CreateGameRoom.js';
 import GameRooms from './GameRooms.js';
 import Stats from './Stats.js';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/creategameroom" element={<CreateGameRoom />} />
           <Route path="/gamerooms" element={<GameRooms />} />
           <Route path="/stats" element={<Stats />} />
         </Routes>

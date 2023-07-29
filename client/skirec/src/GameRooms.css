@@ -1,9 +1,15 @@
 .game-rooms {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
+    margin-top: 50px;
+  }
+  
+  .game-rooms h1 {
+    color: #333;
+    font-size: 2.5rem;
+  }
+  
+  .game-rooms p {
+    color: #666;
+    font-size: 1.2rem;
   }
   

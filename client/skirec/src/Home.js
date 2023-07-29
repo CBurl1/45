@@ -52,6 +52,11 @@ function Home() {
             {user ? (
               <>
                 <Button variant="primary" className="my-2 btn-custom nav-button">
+                  <Link to="/creategameroom" className="text-link nav-link">
+                    Create Game Room
+                  </Link>
+                </Button>
+                <Button variant="primary" className="my-2 btn-custom nav-button">
                   <Link to="/gamerooms" className="text-link nav-link">
                     Game Rooms
                   </Link>
@@ -92,6 +97,7 @@ function Home() {
 }
 
 export default Home;
+
 
 
 
