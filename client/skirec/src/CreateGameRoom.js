@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import './CreateGameRoom.css';
 
 function CreateGameRoom() {
   const [validated, setValidated] = useState(false);
@@ -36,47 +37,51 @@ function CreateGameRoom() {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group controlId="players">
-        <Form.Label>Number of Players</Form.Label>
-        <Form.Control as="select" value={players} onChange={e => setPlayers(e.target.value)} required>
-          <option value="" disabled>Choose...</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Control>
-        <Form.Control.Feedback type="invalid">
-          Please choose the number of players.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group controlId="betting">
-        <Form.Label>Betting</Form.Label>
-        <Form.Control as="select" value={betting} onChange={e => setBetting(e.target.value)} required>
-          <option value="" disabled>Choose...</option>
-          <option>On</option>
-          <option>Off</option>
-        </Form.Control>
-        <Form.Control.Feedback type="invalid">
-          Please choose an option.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group controlId="teams">
-        <Form.Label>Teams</Form.Label>
-        <Form.Control as="select" value={teams} onChange={e => setTeams(e.target.value)} required>
-          <option value="" disabled>Choose...</option>
-          <option>On</option>
-          <option>Off</option>
-        </Form.Control>
-        <Form.Control.Feedback type="invalid">
-          Please choose an option.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Button type="submit">Submit form</Button>
-    </Form>
+    <>
+      <h2 className="create-room-heading">Create a Game Room</h2>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form.Group controlId="players">
+          <Form.Label>Number of Players</Form.Label>
+          <Form.Control as="select" value={players} onChange={e => setPlayers(e.target.value)} required>
+            <option value="" disabled>Choose...</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </Form.Control>
+          <Form.Control.Feedback type="invalid">
+            Please choose the number of players.
+          </Form.Control.Feedback>
+        </Form.Group>
+  
+        <Form.Group controlId="betting">
+          <Form.Label>Betting</Form.Label>
+          <Form.Control as="select" value={betting} onChange={e => setBetting(e.target.value)} required>
+            <option value="" disabled>Choose...</option>
+            <option>On</option>
+            <option>Off</option>
+          </Form.Control>
+          <Form.Control.Feedback type="invalid">
+            Please choose an option.
+          </Form.Control.Feedback>
+        </Form.Group>
+  
+        <Form.Group controlId="teams">
+          <Form.Label>Teams</Form.Label>
+          <Form.Control as="select" value={teams} onChange={e => setTeams(e.target.value)} required>
+            <option value="" disabled>Choose...</option>
+            <option>On</option>
+            <option>Off</option>
+          </Form.Control>
+          <Form.Control.Feedback type="invalid">
+            Please choose an option.
+          </Form.Control.Feedback>
+        </Form.Group>
+        
+        <Button type="submit">Submit form</Button>
+      </Form>
+    </>
   );
-}
+  }
 
 export default CreateGameRoom;
-
-

@@ -7,3 +7,10 @@
     text-align: center;
   }
   
+.create-room-heading {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
