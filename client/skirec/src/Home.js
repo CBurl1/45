@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/user';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import './Home.css'; // Import the CSS file for additional styles
 
 function Home() {
   const { user, setUser } = useContext(UserContext);
@@ -22,7 +21,7 @@ function Home() {
       })
       .catch(error => {
         console.error(error);
-        setUser(null); // Set user to null if there was an error
+        setUser(null);
       });
 
     fetch('/skiresorts')
@@ -48,7 +47,7 @@ function Home() {
           <>
             <h1 className="welcome-message">Welcome, {user.name}</h1>
             <strong className="description">
-              Comment on the state of terrain parks and let other users know about changes that the park crew has made
+              Let the cards begin!
             </strong>
           </>
         )}
@@ -114,23 +113,8 @@ function Home() {
 
         <hr />
 
-        <h2 style={{ fontSize: '50px', fontWeight: 'bold', marginTop: '50px', marginBottom: '50px' }}>Supported Resorts</h2>
-        <Row className="resort-row">
-          {resorts.map(resort => (
-            <Col md={4} key={resort.id} className="resort-col">
-              <Card>
-                <div className="resort-image">
-                  <Card.Img variant="top" src={resort.image} alt={resort.name} />
-                </div>
-                <Card.Body>
-                  <Card.Title>
-                    <div className="resort-text">{resort.name}</div>
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <h2 style={{ fontSize: '50px', fontWeight: 'bold', marginTop: '50px', marginBottom: '50px' }}>45</h2>
+
       </header>
     </Container>
   );
