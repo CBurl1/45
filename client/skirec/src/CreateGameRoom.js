@@ -37,8 +37,6 @@ function CreateGameRoom() {
   };
 
   return (
-    <>
-      <h2 className="create-room-heading">Create a Game Room</h2>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group controlId="players">
           <Form.Label>Number of Players</Form.Label>
@@ -80,7 +78,6 @@ function CreateGameRoom() {
         
         <Button type="submit">Submit form</Button>
       </Form>
-    </>
   );
   }
 

@@ -39,39 +39,6 @@ class User(db.Model, SerializerMixin):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8')) 
     
 
-
-
-class Resort(db.Model, SerializerMixin):
-    __tablename__ = 'resorts'
-    serialize_rules = ('-comments','users', '-users._password_hash', 'users')
-
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    location_region = db.Column(db.String, nullable=False)
-    location_state = db.Column(db.String, nullable=False)
-    image = db.Column(db.String)
-    users = association_proxy("comments", "user")
-    comments = db.relationship('Comment', backref='resort')
-
-    # def to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         'name': self.name,
-    #         'location_region': self.location_region,
-    #         'location_state': self.location_state
-    #     }
-
-
-    @validates('name')
-    def validate_name(self, key, value):
-        if not value:
-            raise ValueError('Name cannot be empty')
-        existing_resort = Resort.query.filter_by(name=value).first()
-        if existing_resort and existing_resort.id != self.id:
-            raise ValueError('Resort with same name already exists')
-        return value
-
 class Comment(db.Model, SerializerMixin):
     __tablename__ = 'comments'
 
